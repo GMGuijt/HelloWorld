@@ -52,3 +52,14 @@ def student_report(name_of_array):
 #for record in filtered_records:
 #    linebreak(f"Name: {record['Name']}",f"Grade: {record['Grade']}")
 
+
+
+#gesugereerde oplossing die in main moet
+
+#opencsv(records)
+
+#average('Grade',records)
+
+#filter(filtered_records,records,80.0)
+
+#student_report(filteref_records)
