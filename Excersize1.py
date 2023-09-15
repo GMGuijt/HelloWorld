@@ -9,8 +9,6 @@ def linebreak(a):
 
 def opencsv(name_of_array):
     """open een csv door middel van een array ervan te maken. De ingevoerde variabele is de naam van de variabele waaronder de gewenste array bekend komt te staan. Na het initialiseren wordt er gevraagd naar het pad naar, en de naam van, het gewenste bestand."""
-    file_path = input("Enter the path to the CSV file: ")
-    file_name = input("Enter the name of the CSV file: ") #voor deze opdracht was dit "r".
     name_of_array = []
     with open(file_path, file_name) as file:
         csv_reader = csv.DictReader(file)
@@ -56,6 +54,8 @@ def student_report(name_of_array):
 
 #gesugereerde oplossing die in main moet
 
+#file_path = input("Enter the path to the CSV file: ")
+#file_name = input("Enter the name of the CSV file: ") #voor deze opdracht was dit "r".
 #opencsv(records)
 
 #average('Grade',records)
