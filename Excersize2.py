@@ -1,9 +1,10 @@
 
 def return_function_mandel(x,y, a_n_vorige):
     """use this function to calculate an itteration of a mandelbot, if it diverges to infinity return 0"""
-       a_n = ((a_n_vorige)**2) + complex(x,y)
-       if abs(a_n) > 100:
-            a_n = 0
+    a_n = ((a_n_vorige)**2) + complex(x,y)
+    if abs(a_n) > 100:
+        a_n = 0
+    #np array met 40000 itteraties voor elke uitkomst
         
         
 
@@ -15,6 +16,7 @@ def draw_mandel(width):
     y_range = [-1, -1]
 
     #gebruik diverging_index voor kleur
+    #np array met 40000 itteraties voor elke uitkomst
     
 
 
