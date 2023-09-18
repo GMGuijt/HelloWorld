@@ -1,10 +1,20 @@
 
 def return_function_mandel(x,y, a_n_vorige):
-    """use this function to calculate an itteration of a mandelbot, if it diverges to infinity return 0"""
+    """use this function to calculate an iteration of a mandelbrot, if it diverges to infinity return 0"""
+    #for n 
+    n = 0 
+
+    #while loop, als n == 100 -> n = 0, abs momenteel nummer > 2 geef n. anders n + 1 & functie a_n
+
+
     a_n = ((a_n_vorige)**2) + complex(x,y)
-    if abs(a_n) > 100:
-        a_n = 0
-    #np array met 40000 itteraties voor elke uitkomst
+
+    #np array array in array 
+    # 1 array is een rij met kolommen, andere plaatje
+    # min + (variable * deltaminmax/200)
+    # maak waarde 0 tot ? naar 0 tot 255 voor kleur 
+
+
         
         
 
