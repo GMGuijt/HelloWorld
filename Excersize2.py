@@ -63,7 +63,6 @@ def draw_mandel(width):
     coördinate_array = calculate_coördinates(x_range, y_range, width)
     values_array = combine_values(coördinate_array)
     color_array = assign_color(values_array)
-    
 
 
     
