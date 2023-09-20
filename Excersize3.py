@@ -8,7 +8,7 @@ n0 = 5
 def d(node):
     """counts the number of edges connected to the given node"""
     sum = 0
-    for i in len(g):
+    for i in range(len(g)):
         sum += g.number_of_edges(node,i)
     return sum
 
@@ -21,18 +21,14 @@ def p(node):
 
 g = nx.star_graph(n0)
 wanted_size = 7
-while len(g) < wanted_size-1:
+while len(g) < wanted_size:
     total = len(g)
+    g.add_note(len(g))
     while d(total+1) < 4:
         for i in len(g):
             if g.number_of_edges(i,total+1) == 0:
                 if random.random > p(i):
                     g.add_edge(i,total+1)
 
-
 nx.draw(g)
 plt.show()
-
-
-
-
