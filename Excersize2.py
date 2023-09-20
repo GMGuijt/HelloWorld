@@ -53,6 +53,9 @@ def assign_color(all_values):
             color_row.append(color)
         color_values.append(color_row)
 
+def plot_image(array_color_values):
+    plt.imshow(array_color_values)
+
 def draw_mandel(width):
     """"teken een plaatje van de mandel in een x bij x groote """
     import numpy as np
@@ -63,6 +66,9 @@ def draw_mandel(width):
     coördinate_array = calculate_coördinates(x_range, y_range, width)
     values_array = combine_values(coördinate_array)
     color_array = assign_color(values_array)
+
+    plot_image(color_array)
+
 
 
     
