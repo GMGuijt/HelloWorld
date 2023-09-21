@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
 import random
 
-random(nodes)
+list = [5,4,3]
+list.remove(5)
+print(list)
