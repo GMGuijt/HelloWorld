@@ -74,10 +74,12 @@ def FillUp(Network):
         if edges_node<4 and edges_node1<4:
             Network.add_edge(node,node1)
             print('added note')
-        elif edges_node1 == 4:
+        if edges_node1 == 4:
             nodes.remove(node1)
-        else:
+        if edges_node == 4:
             nodes.remove(node)
+        print(nodes)
+        print(nx.number_of_edges(Network))
         count += 1
 
 def Addnode(node,Network):
