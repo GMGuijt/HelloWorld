@@ -5,6 +5,7 @@ import scipy.stats as sp
 import random
 
 TotalNodes = 50
+M = 4
 
 def main(TotalNodes):
     """Main function foor creating the network"""
@@ -43,7 +44,7 @@ def AddEdges(Network,node):
         -A node whith some edges"""
     #Forloop for calculating pi and plotting the edge
     for i in range(len(Network)-1):
-        if CountEdges(Network,i) == 4:
+        if CountEdges(Network,i) == M:
             continue
         di = CountEdges(Network,i)
         dj = 0
@@ -71,12 +72,12 @@ def FillUp(Network):
             continue
         edges_node = CountEdges(Network,node)
         edges_node1 = CountEdges(Network,node1)
-        if edges_node<4 and edges_node1<4:
+        if edges_node<M and edges_node1<M:
             Network.add_edge(node,node1)
             print('added note')
-        if edges_node1 == 4:
+        if edges_node1 == M:
             nodes.remove(node1)
-        if edges_node == 4:
+        if edges_node == M:
             nodes.remove(node)
         print(nodes)
         print(nx.number_of_edges(Network))
