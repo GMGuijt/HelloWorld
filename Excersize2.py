@@ -1,5 +1,6 @@
 
 import numpy as np
+import matplotlib.pyplot as plt
 def calculate_coördinates(x_range: type(list), y_range : type(list), width : type(int)):
     """hierbij gebruiken we de range van de waarde om x aantal waardes te leggen op de assen en een 2d numpy array te maken met de bijbehorende coordinaten"""
     coords = np.array()
