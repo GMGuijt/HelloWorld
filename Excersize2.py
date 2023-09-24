@@ -36,16 +36,6 @@ def calculate_value(x,y):
 
     #while loop, als n == 100 -> n = 0, abs momenteel nummer > 2 geef n. anders n + 1 & functie a_n
 
-#def combine_values(coordinates_graph, width):
-#    values = np.zeros([width, width, 1])
-#    for i in range(0, width):
-#        itteration = coordinates_graph[i]
-#        values_row = zeros([width, 1])
-#        for j in range(0, width):
-#            coord = itteration[j]
-#            value_one_cord = calculate_value(coord[0], coord[1])
-#            values_row[j] = value_one_cord
-#        values[i] = values_row
 
 
 def assign_color(all_values, width):
@@ -59,7 +49,7 @@ def assign_color(all_values, width):
         for j in range(0, width):
             point_value = array_y_values[j]
             color = (j*255)/max_n
-            color_row[j] = color
+            color_row[j] = int(color)
         color_values[i] = color_row
     return color_values
 
@@ -76,7 +66,7 @@ def draw_mandel(width):
     values_array = calculate_coördinates_values(x_range, y_range, width)
     color_array = assign_color(values_array, width)
 
-    #plot_image(color_array)
+    plot_image(color_array)
 
 
 draw_mandel(200)
