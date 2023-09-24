@@ -1,21 +1,22 @@
-
 import numpy as np
-def calculate_coördinates(x_range: type(list), y_range : type(list), width : type(int)):
+import matplotlib.pyplot as plt
+def calculate_coördinates_values(x_range, y_range, width):
     """hierbij gebruiken we de range van de waarde om x aantal waardes te leggen op de assen en een 2d numpy array te maken met de bijbehorende coordinaten"""
-    coords = np.array()
-    for i in width:
+    value_array = np.zeros([width, width, 1])
+    for i in range(0, width):
         y = y_range[0] + i*(y_range[1]-y_range[0])/width #bereken width aantal y coordinaten
-        X = np.array()
-        for j in width:
-            x = x_range[0] + j*(x_range[1]-x_range[0])/width #bereken voor elk y coordinaat een width aantal x coordinaten 
-            X.append([x,y])
-        Y.append(X)
+        X = np.zeros([width, 1])
+        for j in range(0, width):
+            x = x_range[0] + j*(x_range[1]-x_range[0])/width #bereken voor elk y coordinaat een width aantal x coordinaten
+            value = calculate_value(x,y) 
+            X[j] = value
+        value_array[i] = X
     
     #np array array in array 
     # 1 array is een rij met kolommen, andere plaatje
     #min + (variable * deltaminmax/200)
 
-def calculate_value(x: type(int),y: type(int)):
+def calculate_value(x,y):
     """use this function to calculate an iteration of a mandelbrot, if it diverges to infinity return 0"""
     n = 1
     a_n = 0
@@ -24,7 +25,7 @@ def calculate_value(x: type(int),y: type(int)):
         if n == 100:
             n = 0
         if abs(a_n) > 2:
-            end
+            breakpoint
         
         a_n = a_n**2 + complex (x, y)
         n += 1
@@ -32,14 +33,16 @@ def calculate_value(x: type(int),y: type(int)):
 
     #while loop, als n == 100 -> n = 0, abs momenteel nummer > 2 geef n. anders n + 1 & functie a_n
 
-def combine_values(coordinates_graph):
-    values = np.array()
-    for i in coordinates_graph:
-        values_row = np.array()
-        for j in i:
-            value_one_cord = calculate_value(j[0], j[1])
-            values_row.append(value_one_cord)
-        values.append(values_row)  
+#def combine_values(coordinates_graph, width):
+#    values = np.zeros([width, width, 1])
+#    for i in range(0, width):
+#        itteration = coordinates_graph[i]
+#        values_row = zeros([width, 1])
+#        for j in range(0, width):
+#            coord = itteration[j]
+#            value_one_cord = calculate_value(coord[0], coord[1])
+#            values_row[j] = value_one_cord
+#        values[i] = values_row
 
 
 def assign_color(all_values):
@@ -64,14 +67,13 @@ def draw_mandel(width):
     x_range = [-1.5, 0.5]
     y_range = [-1, 1]
 
-    coördinate_array = calculate_coördinates(x_range, y_range, width)
-    values_array = combine_values(coördinate_array)
+    values_array = calculate_coördinates_values(x_range, y_range, width)
     color_array = assign_color(values_array)
 
     plot_image(color_array)
 
 
-
+draw_mandel(200)
     
  
     
