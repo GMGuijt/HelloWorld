@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-def calculate_coördinates(x_range: type(list), y_range : type(list), width : type(int)):
+def calculate_coördinates_values(x_range, y_range, width):
     """hierbij gebruiken we de range van de waarde om x aantal waardes te leggen op de assen en een 2d numpy array te maken met de bijbehorende coordinaten"""
     value_array = np.zeros([width, width, 1])
     for i in range(0, width):
@@ -15,17 +15,20 @@ def calculate_coördinates(x_range: type(list), y_range : type(list), width : ty
     #np array array in array 
     # 1 array is een rij met kolommen, andere plaatje
     #min + (variable * deltaminmax/200)
+    return value_array
 
 def calculate_value(x,y):
     """use this function to calculate an iteration of a mandelbrot, if it diverges to infinity return 0"""
     n = 1
     a_n = 0
+    end = False
 
-    while n != 0:
+    while end == False:
         if n == 100:
             n = 0
+            end = True
         if abs(a_n) > 2:
-            breakpoint
+            end = True
         
         a_n = a_n**2 + complex (x, y)
         n += 1
@@ -45,13 +48,13 @@ def calculate_value(x,y):
 #        values[i] = values_row
 
 
-def assign_color(all_values):
+def assign_color(all_values, width):
     """hierbij wordt de diverging index omgezet naar een value op het kleurenschema"""
     # maak waarde 0 tot ? naar 0 tot 255 voor kleur 
     max_n = all_values.max()
-    color_values = np.array()
+    color_values = np.zeros([width, width, 1])
     for i in all_values:
-        color_row = np.array()
+        color_row = np.zeros([width, 1])
         for j in i:
             color = (j*255)/max_n
             color_row.append(color)
