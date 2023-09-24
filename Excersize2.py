@@ -55,6 +55,7 @@ def assign_color(all_values, width):
 
 def plot_image(array_color_values):
     plt.imshow(array_color_values)
+    plt.show
 
 def draw_mandel(width):
     """"teken een plaatje van de mandel in een x bij x groote """
