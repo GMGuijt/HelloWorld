@@ -71,6 +71,7 @@ def draw_mandel(width):
 
     plot_image(color_array)
 
+draw_mandel(5)
 
 
     
