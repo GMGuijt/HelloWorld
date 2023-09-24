@@ -11,10 +11,6 @@ def calculate_coördinates_values(x_range, y_range, width):
             value = calculate_value(x,y) 
             X[j] = value
         value_array[i] = X
-    
-    #np array array in array 
-    # 1 array is een rij met kolommen, andere plaatje
-    #min + (variable * deltaminmax/200)
     return value_array
 
 def calculate_value(x,y):
@@ -34,26 +30,6 @@ def calculate_value(x,y):
         n += 1
     return n
 
-    #while loop, als n == 100 -> n = 0, abs momenteel nummer > 2 geef n. anders n + 1 & functie a_n
-
-
-
-def assign_color(all_values, width):
-    """hierbij wordt de diverging index omgezet naar een value op het kleurenschema"""
-    # maak waarde 0 tot ? naar 0 tot 255 voor kleur 
-    max_n = all_values.max()
-    color_values = np.zeros([width, width, 3])
-    for i in range(0, width):
-        array_y_values = all_values[i]
-        color_row = np.zeros([width, 3])
-        for j in range(0, width):
-            point_value = array_y_values[j]
-            color = int(j*255)/max_n
-            RGB = [color, color, color]
-            color_row[j] = RGB
-        color_values[i] = color_row
-    return color_values
-
 def plot_image(array_color_values):
     plt.imshow(array_color_values)
     plt.show()
@@ -66,9 +42,7 @@ def draw_mandel(width):
     y_range = [-1, 1]
 
     values_array = calculate_coördinates_values(x_range, y_range, width)
-    color_array = assign_color(values_array, width)
 
-    #plot_image(color_array)
     plot_image(values_array)
 
 draw_mandel(200)
