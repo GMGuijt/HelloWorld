@@ -42,14 +42,15 @@ def assign_color(all_values, width):
     """hierbij wordt de diverging index omgezet naar een value op het kleurenschema"""
     # maak waarde 0 tot ? naar 0 tot 255 voor kleur 
     max_n = all_values.max()
-    color_values = np.zeros([width, width, 1])
+    color_values = np.zeros([width, width, 3])
     for i in range(0, width):
         array_y_values = all_values[i]
-        color_row = np.zeros([width, 1])
+        color_row = np.zeros([width, 3])
         for j in range(0, width):
             point_value = array_y_values[j]
-            color = (j*255)/max_n
-            color_row[j] = int(color)
+            color = int(j*255)/max_n
+            RGB = [color, color, color]
+            color_row[j] = RGB
         color_values[i] = color_row
     return color_values
 
@@ -67,7 +68,8 @@ def draw_mandel(width):
     values_array = calculate_coördinates_values(x_range, y_range, width)
     color_array = assign_color(values_array, width)
 
-    plot_image(color_array)
+    #plot_image(color_array)
+    plot_image(values_array)
 
 draw_mandel(200)
     
