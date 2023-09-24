@@ -53,12 +53,15 @@ def assign_color(all_values, width):
     # maak waarde 0 tot ? naar 0 tot 255 voor kleur 
     max_n = all_values.max()
     color_values = np.zeros([width, width, 1])
-    for i in all_values:
+    for i in range(0, width):
+        array_y_values = all_values[i]
         color_row = np.zeros([width, 1])
-        for j in i:
+        for j in range(0, width):
+            point_value = array_y_values[j]
             color = (j*255)/max_n
-            color_row.append(color)
-        color_values.append(color_row)
+            color_row[j] = color
+        color_values[i] = color_row
+    return color_values
 
 def plot_image(array_color_values):
     plt.imshow(array_color_values)
@@ -71,9 +74,9 @@ def draw_mandel(width):
     y_range = [-1, 1]
 
     values_array = calculate_coördinates_values(x_range, y_range, width)
-    color_array = assign_color(values_array)
+    color_array = assign_color(values_array, width)
 
-    plot_image(color_array)
+    #plot_image(color_array)
 
 
 draw_mandel(200)
