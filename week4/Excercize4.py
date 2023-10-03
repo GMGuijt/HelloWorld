@@ -1,8 +1,5 @@
 import pandas as pd
 
-#$conda install -c conda-forge textblob
-#$python -m textblob.download_corpora
-
 #import textblob as tb
 
 
