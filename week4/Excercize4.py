@@ -28,5 +28,3 @@ def detect_languages(dataframe, column_name):
 
 detect_languages(df, 'Tweet')
     
-
-
