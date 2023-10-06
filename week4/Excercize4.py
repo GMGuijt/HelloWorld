@@ -7,12 +7,12 @@ import pandas as pd
 from langdetect import detect
 #import textblob as tb
 
-df = pd.read_excel('tweets.xlsx')
+df = pd.read_excel(r"C:\Users\Gebruiker\Documents\school\DS\2_5\ds5_assignment_group7\week4\tweets.xlsx")
 
 
 def list_singular_entity(dataframe, column_name):
     enitities = []
-    for i in range(dataframe):
+    for i in range(len(dataframe)):
         enitities.append(dataframe[column_name])
     return enitities
         
@@ -22,13 +22,14 @@ def detect_languages(dataframe, column_name):
     entities = list_singular_entity(dataframe, column_name)
     entity_language_dict = {'entity', 'language'}
     for i in entities:
-        language = detect(i)
-        entity_language_dict.append(language, i)
-    df_entity_language = df(entity_language_dict)
-    return df_entity_language
+        print(i)
+        #language = detect(i)
+        #entity_language_dict.append(language, i)
+    #df_entity_language = df(entity_language_dict)
+    #return df_entity_language
 
-detect_languages(df, 'Tweet')
-
+#df = detect_languages(df, 'Tweet')
+#df.head()
 #def analyze_sentiment_english(entity):
    # subjectivity = TextBlob(entity).sentiment.subjectivity
     #polarity = TextBlob(entity).sentiment.polarity
