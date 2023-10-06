@@ -7,7 +7,6 @@ import pandas as pd
 from langdetect import detect
 #import textblob as tb
 
-
 df = pd.read_excel('tweets.xlsx')
 
 
