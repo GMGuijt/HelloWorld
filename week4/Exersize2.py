@@ -1,15 +1,24 @@
 import pandas as pd
-import datetime
-df = pd.read_excel("week4\hotelBookings.xlsx")
+from datetime import datetime
+def main():
+    df = pd.read_excel("week4\hotelBookings.xlsx")
+    df = clear4(df)
+    df = clear5(df)
+    df = clear8(df)
+    df = clear9(df)
+    df = clear10(df)
+    df = clear11(df)
+    df.to_excell('Clean_hotelBookings.xlsx')
 
-def clean_4(df):
+def clear4(df):
     #vervang alle jaren hoger dan het huidig jaar door 2015, want dat is het enige jaar dat voorkomt
     nono = df[df.arrival_date_year > datetime.now().year].index
     df.loc[df.index.isin(nono),'arrival_date_year'] = 2015
     if len(df[df.arrival_date_year > datetime.now().year]) == 0:
         print("column arrival_date_year is clean")
         return df
-def clean_5(df):
+
+def clear5(df):
     #vervang alle rijen die niet in de lijst met maanden komen door de maand july
     nono = df[~df.arrival_date_month.isin(['Januari','Februari','March','April','May','June','July','August','September','October','November','December'])].index
     df.loc[df.index.isin(nono),'arrival_date_month'] = 'July'
@@ -27,6 +36,31 @@ def clear8(df):
 def clear9(df):
     df = df.drop(df[df['adults'] > 50].index)
     df = df.drop(df[df['children'] > 50].index)
-    if len(df[df['children'] > 50]) == 0 and len(df[df['adults'] > 50]) == 0:
+    c = len(df[df['children'] > 50]) == 0
+    a = len(df[df['adults'] > 50]) == 0
+    if c and a:
         print("columns adults and children are clean")
+        return df
 
+def clear10(df):
+    for i in range(len(df)):
+        if len(df.loc[i,'meal']) != 2:
+            df.loc[i,'meal'] = df.loc[i,'meal'].replace(' ','')
+        print('column meal is clean')
+    return df
+
+def clear11(df):
+    for i in range(len(df)):
+        if type(df.loc[i,'country']) == int:
+            df.loc[i,'country'] = None
+        elif type(df.loc[i,'country']) == float:
+            df.loc[i,'country'] = None
+            continue
+        elif df.loc[i,'country'] == None:
+            'Okay'
+        elif len(df.loc[i,'country']) != 2:
+            df.loc[i,'country'] = df.loc[i,'country'].replace(' ','')
+    print('column country is clean')
+    return df
+
+main()
