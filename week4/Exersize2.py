@@ -8,7 +8,7 @@ def main():
     df = clear9(df)
     df = clear10(df)
     df = clear11(df)
-    df.to_excell('Clean_hotelBookings.xlsx')
+    df.to_excel('Clean_hotelBookings.xlsx')
 
 def clear4(df):
     #vervang alle jaren hoger dan het huidig jaar door 2015, want dat is het enige jaar dat voorkomt
@@ -28,14 +28,14 @@ def clear5(df):
     
 def clear8(df):
     #We verwijderen alle rijen waar de overnachtingen niet integer zijn, want aan die rijen kunnen we de data niet vertrouwen
-    df = df.drop(df[df['stays_in_week_nights']%1 != 0].index)
-    if len(df[df['stays_in_week_nights']%1 != 0]):
+    df.drop(df[df['stays_in_week_nights']%1 != 0].index,inplace = True)
+    if len(df[df['stays_in_week_nights']%1 != 0]) == 0:
         print("column stays_in_week_nights is clean")
         return df
 
 def clear9(df):
-    df = df.drop(df[df['adults'] > 50].index)
-    df = df.drop(df[df['children'] > 50].index)
+    df.drop(df[df['adults'] > 50].index,inplace = True)
+    df.drop(df[df['children'] > 50].index,inplace = True)
     c = len(df[df['children'] > 50]) == 0
     a = len(df[df['adults'] > 50]) == 0
     if c and a:
@@ -43,10 +43,13 @@ def clear9(df):
         return df
 
 def clear10(df):
+    df.reset_index(inplace = True)
+    df.drop('index',axis = 1,inplace = True)
+    print(df[df.meal.index == 19]['meal'])
     for i in range(len(df)):
         if len(df.loc[i,'meal']) != 2:
             df.loc[i,'meal'] = df.loc[i,'meal'].replace(' ','')
-        print('column meal is clean')
+    print('column meal is clean')
     return df
 
 def clear11(df):
