@@ -18,8 +18,7 @@ def remove_dupes(data):
     remove = []
     for i in range(len(data)):
         for j in range(i+1,len(data)):
-            #if data[i].loc[:,'','HL.4'] == data[j].loc[:,'','HL.4']:
-            if data.iloc[i] == data.iloc[j]:
+            if list(data.loc[i]) == list(data.loc[j]):
                 remove.append(i)
             else:
                 continue
@@ -29,21 +28,6 @@ def collapse_doubles(data):
     '''sommeer producten die tweemaal of vaker door dezelfde klant is gekocht'''
 
  
-lijst = list(range(7))
-lijst.append(4)
-lijst.append(3)
-lijst.append(6)
-data = pd.DataFrame(lijst)
-#ndf = remove_empty(df)
-#print(len(df))
-#print(len(ndf))
-print(data)
-#remove_dupes(data)
-print(data.iloc[4])
-print(data.iloc[7])
-if data.iloc[4] == data.iloc[7]:
-    print(True)
-else:
-    print(False)
 
+remove_dupes(df)
 
