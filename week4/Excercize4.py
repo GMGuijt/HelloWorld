@@ -1,7 +1,7 @@
 import pandas as pd
 
-pip install langdetect
-pip install textblob
+#pip install langdetect
+#pip install textblob
 
 from langdetect import detect
 import textblob as tb
