@@ -7,18 +7,12 @@ import pandas as pd
 from langdetect import detect
 import textblob as tb
 from nltk.sentiment import SentimentIntensityAnalyzer
+import nltk
+nltk.download('vader_lexicon')
 
 df = pd.read_excel(r"C:\Users\Gebruiker\Documents\school\DS\2_5\ds5_assignment_group7\week4\tweets.xlsx")
-
-
-def list_singular_entity(dataframe, column_name):
-    enitities = []
-    for i in range(len(dataframe)):
-        enitities.append(dataframe[column_name])
-    return enitities
         
 def analyze_sentiment_english(entity):
-    subjectivity = tb.TextBlob(entity).sentiment.subjectivity
     polarity = tb.TextBlob(entity).sentiment.polarity
     if polarity < 0:
         return 'negative'
@@ -38,9 +32,9 @@ def analyze_sentiment_other(entity):
         return 'neutral'
 
 def detect_languages_sentiment(dataframe, column_name):
-    entities = list_singular_entity(dataframe, column_name)
+    entities = dataframe[column_name].values.tolist()
     languages = []
-    sentiments = []
+    sentiments = []S
     for i in entities:
         language = detect(i[1])
         languages.append(language)
