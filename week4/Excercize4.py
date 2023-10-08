@@ -1,16 +1,15 @@
-import pandas as pd
-
 #pip install langdetect
 #pip install textblob
 #pip install nltk
 
+import pandas as pd
 from langdetect import detect
 import textblob as tb
 from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
 nltk.download('vader_lexicon')
 
-df = pd.read_excel(r"C:\Users\Gebruiker\Documents\school\DS\2_5\ds5_assignment_group7\week4\tweets.xlsx")
+twitter_df = pd.read_excel(r"C:\Users\Gebruiker\Documents\school\DS\2_5\ds5_assignment_group7\week4\tweets.xlsx")
         
 def analyze_sentiment_english(entity):
     """uses the polarity of Textblob sentiment detection to calculate the sentiment of the entered entity
@@ -41,11 +40,12 @@ def analyze_sentiment_other(entity):
     txt = SentimentIntensityAnalyzer()
     sentiment_scores = txt.polarity_scores(entity)
     if sentiment_scores['compound'] >= 0.05:
-        return 'positve'
+        return 'positive'
     elif sentiment_scores['compound'] <= -0.05:
         return 'negative'
     else:
         return 'neutral'
+
 
 def detect_languages_sentiment(dataframe, column_name):
     """detects the language and sentiment from all the entities in a particual column.
@@ -58,25 +58,23 @@ def detect_languages_sentiment(dataframe, column_name):
         pandas dataframe: dataframe with the entity, language and sentiment of the entered column
     """
     entities = dataframe[column_name].values.tolist()
-    languages = []
-    sentiments = []
+    data =[]
     for i in entities:
+        itteration = [i]
         try:
             language = detect(i)
         except:
             language = 'None'       
-        languages.append(language)
+        itteration.append(language)
         if language == 'en':
-            sentiments.append(analyze_sentiment_english(i))
+            itteration.append(analyze_sentiment_english(i))
         elif language == 'None':
-            sentiments.append('None')
+            itteration.append('None')
         else:
-            sentiments.append(analyze_sentiment_other(i))
-    properties_entities = list(zip(entities, languages, sentiments))        
-    df_entity_language_sentiments = pd.DataFrame(properties_entities, columns=['entity', 'language', 'sentiment'])
+            itteration.append(analyze_sentiment_other(i))
+        data.append(itteration)      
+    df_entity_language_sentiments = pd.DataFrame(data, columns=['entity', 'language', 'sentiment'])
     return df_entity_language_sentiments
 
-df = detect_languages_sentiment(df, 'Tweet')
+df = detect_languages_sentiment(twitter_df, 'Tweet')
 print(df.head(10))
-
-        
