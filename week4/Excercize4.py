@@ -5,7 +5,8 @@ import pandas as pd
 #pip install nltk
 
 from langdetect import detect
-#import textblob as tb
+import textblob as tb
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 df = pd.read_excel(r"C:\Users\Gebruiker\Documents\school\DS\2_5\ds5_assignment_group7\week4\tweets.xlsx")
 
@@ -17,8 +18,8 @@ def list_singular_entity(dataframe, column_name):
     return enitities
         
 def analyze_sentiment_english(entity):
-    subjectivity = TextBlob(entity).sentiment.subjectivity
-    polarity = TextBlob(entity).sentiment.polarity
+    subjectivity = tb.TextBlob(entity).sentiment.subjectivity
+    polarity = tb.TextBlob(entity).sentiment.polarity
     if polarity < 0:
         return 'negative'
     if polarity > 0:
@@ -27,6 +28,14 @@ def analyze_sentiment_english(entity):
         return 'neutral'
 
 def analyze_sentiment_other(entity):
+    txt = SentimentIntensityAnalyzer()
+    sentiment_scores = txt.polarity_scores(entity)
+    if sentiment_scores['compound'] >= 0.05:
+        return 'positve'
+    elif sentiment_scores['compound'] <= -0.05:
+        return 'negative'
+    else:
+        return 'neutral'
 
 def detect_languages_sentiment(dataframe, column_name):
     entities = list_singular_entity(dataframe, column_name)
@@ -41,9 +50,9 @@ def detect_languages_sentiment(dataframe, column_name):
             sentiments.append(analyze_sentiment_other(i[1]))
     properties_entities = list(zip(entities, languages, sentiments))        
     df_entity_language_sentiments = pd.DataFrame(properties_entities, columns=['entity', 'language', 'sentiment'])
-    return df_entity_language
+    return df_entity_language_sentiments
 
-df = detect_languages(df, 'Tweet')
+df = detect_languages_sentiment(df, 'Tweet')
 df.head()
 
         
