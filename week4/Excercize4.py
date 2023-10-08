@@ -77,6 +77,6 @@ def detect_languages_sentiment(dataframe, column_name):
     return df_entity_language_sentiments
 
 df = detect_languages_sentiment(df, 'Tweet')
-df.head()
+print(df.head(10))
 
         
