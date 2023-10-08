@@ -16,46 +16,53 @@ def list_singular_entity(dataframe, column_name):
         enitities.append(dataframe[column_name])
     return enitities
         
+def analyze_sentiment_english(entity):
+    subjectivity = TextBlob(entity).sentiment.subjectivity
+    polarity = TextBlob(entity).sentiment.polarity
+    if polarity < 0:
+        return 'negative'
+    if polarity > 0:
+        return 'positive'
+    else:
+        return 'neutral'
 
+def analyze_sentiment_other(entity):
 
-def detect_languages(dataframe, column_name):
+def detect_languages_sentiment(dataframe, column_name):
     entities = list_singular_entity(dataframe, column_name)
-    entity_language_dict = {'entity', 'language'}
+    languages = []
+    sentiments = []
     for i in entities:
-        print(i)
-        #language = detect(i)
-        #entity_language_dict.append(language, i)
-    #df_entity_language = df(entity_language_dict)
-    #return df_entity_language
+        language = detect(i[1])
+        languages.append(language)
+        if language == 'en':
+            sentiments.append(analyze_sentiment_english(i[1]))
+        else:
+            sentiments.append(analyze_sentiment_other(i[1]))
+    properties_entities = list(zip(entities, languages, sentiments))        
+    df_entity_language_sentiments = pd.DataFrame(properties_entities, columns=['entity', 'language', 'sentiment'])
+    return df_entity_language
 
-#df = detect_languages(df, 'Tweet')
-#df.head()
-#def analyze_sentiment_english(entity):
-   # subjectivity = TextBlob(entity).sentiment.subjectivity
-    #polarity = TextBlob(entity).sentiment.polarity
-    #if polarity < 0:
-        #return 'negative'
-    #if polarity > 0:
-    #    return 'positive'
-    #else:
-    #    return 'neutral'
+df = detect_languages(df, 'Tweet')
+df.head()
+
     
         
 #def analyze_sentiment_other(entity):
 
        
-#def detect_sentiments(df_entity_language):
-#    sentiments = []
-#    for i in range(len(df_entity_language))
-#    entity_properties = df_entity_language[i]
-#    if entity_properties[1] == 'en':
-#        sentiment_entity = analyze_sentiment_english(entity_properties[0])
-#        sentiment.append(sentiment_entity)
-#    else:
-#        sentiment_entity = analyze_sentiment_other(entity_properties[0])
-#        sentiment.append(sentiment_entity)
-#    df_entity_language['sentiment'] = sentiments
-#    df_entity_language_sentiments = df_entity_language
-#    return df_entity_language_sentiments
+def detect_sentiments(df_entity_language):
+    sentiments = []
+    for i in range(len(df_entity_language))
+    entity_properties = df_entity_language[i]
+    if entity_properties[1] == 'en':
+        sentiment_entity = analyze_sentiment_english(entity_properties[0])
+        sentiment.append(sentiment_entity)
+    else:
+        sentiment_entity = analyze_sentiment_other(entity_properties[0])
+        sentiment.append(sentiment_entity)
+    df_entity_language['sentiment'] = sentiments
+    df_entity_language_sentiments = df_entity_language
+    return df_entity_language_sentiments
     
         
