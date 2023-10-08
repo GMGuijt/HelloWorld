@@ -46,23 +46,4 @@ def detect_languages_sentiment(dataframe, column_name):
 df = detect_languages(df, 'Tweet')
 df.head()
 
-    
-        
-#def analyze_sentiment_other(entity):
-
-       
-def detect_sentiments(df_entity_language):
-    sentiments = []
-    for i in range(len(df_entity_language))
-    entity_properties = df_entity_language[i]
-    if entity_properties[1] == 'en':
-        sentiment_entity = analyze_sentiment_english(entity_properties[0])
-        sentiment.append(sentiment_entity)
-    else:
-        sentiment_entity = analyze_sentiment_other(entity_properties[0])
-        sentiment.append(sentiment_entity)
-    df_entity_language['sentiment'] = sentiments
-    df_entity_language_sentiments = df_entity_language
-    return df_entity_language_sentiments
-    
         
