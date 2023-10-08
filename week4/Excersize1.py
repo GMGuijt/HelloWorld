@@ -15,18 +15,19 @@ def remove_empty(data):
 
 def remove_dupes(data):
     '''verwijder duplicate rijen'''
+    remove = []
     for i in range(len(data)):
         for j in range(i+1,len(data)):
-            if data[i].loc[:,'','HL.4']
+            if list(data.loc[i]) == list(data.loc[j]):
+                remove.append(i)
+            else:
+                continue
+    print(remove)
 
 def collapse_doubles(data):
     '''sommeer producten die tweemaal of vaker door dezelfde klant is gekocht'''
 
+ 
 
-#def 
-
-#ndf = remove_empty(df)
-#print(len(df))
-#print(len(ndf))
-remove_dupes(range(6))
+remove_dupes(df)
 
