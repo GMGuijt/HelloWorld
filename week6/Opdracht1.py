@@ -13,6 +13,7 @@ import math as m
 import statsmodels.api as sm
 from sklearn.metrics import r2_score
 
+
 #genereer dataset
 def generate_data(a,b,c):
     np.random.seed(2)
@@ -46,6 +47,12 @@ def regressionline(training):
 X,results = regressionline(training)
 lijn = results.predict(X)
 
+# evalueer test data
+def testline(test, results):
+    Xtest = sm.add_constant(test[0])
+    predictedYtest = results.predict(Xtest)
+    return predictedYtest
+
 # Plot de dataset
 def scatterplot(x,y):
     plt.scatter(x, y)
@@ -62,6 +69,12 @@ def plot(training,lijn):
 
 # Evalueer data
 r2training = results.rsquared
-r2test = r2_score(test[1],results.predict(test[0]))
-print(r2training)
-print(r2test)
+
+pred = testline(test, results)
+r2test = r2_score(test[1],pred)
+
+if r2test >= r2training:
+    print('all good')
+else:
+    print('try different fit model') 
+
