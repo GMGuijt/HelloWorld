@@ -53,6 +53,18 @@ def testline(test, results):
     predictedYtest = results.predict(Xtest)
     return predictedYtest
 
+# Evalueer data
+def eval(results, test):
+    r2training = results.rsquared
+    
+    pred = testline(test, results)
+    r2test = r2_score(test[1],pred)
+    
+    if r2test >= r2training:
+        print('all good')
+    else:
+        print('try different fit model') 
+
 # Plot de dataset
 def scatterplot(x,y):
     plt.scatter(x, y)
@@ -65,16 +77,7 @@ def scatterplot(x,y):
 def plot(training,lijn):
     plt.plot(training[0],lijn,color='red')
     scatterplot(training[0],training[1])
+
+
+eval(results, test)
 #plot(training,lijn)
-
-# Evalueer data
-r2training = results.rsquared
-
-pred = testline(test, results)
-r2test = r2_score(test[1],pred)
-
-if r2test >= r2training:
-    print('all good')
-else:
-    print('try different fit model') 
-
