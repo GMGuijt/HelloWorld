@@ -11,6 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math as m
 import statsmodels.api as sm
+from sklearn.metrics import r2_score
 
 #genereer dataset
 def generate_data(a,b,c):
@@ -41,8 +42,9 @@ def regressionline(training):
     X = sm.add_constant(training[0])
     model = sm.OLS(training[1], X)
     results = model.fit()
-    predictiony = results.predict(X)
-    return predictiony
+    return X,results
+X,results = regressionline(training)
+lijn = results.predict(X)
 
 # Plot de dataset
 def scatterplot(x,y):
@@ -53,9 +55,13 @@ def scatterplot(x,y):
     plt.show()
 
 # plot alles
-def plot(training):
-    lijn = regressionline(training)
-    plt.plot(training[0],lijn,color='yellow')
+def plot(training,lijn):
+    plt.plot(training[0],lijn,color='red')
     scatterplot(training[0],training[1])
+#plot(training,lijn)
 
-plot(training)
+# Evalueer data
+r2training = results.rsquared
+r2test = r2_score(test[1],results.predict(test[0]))
+print(r2training)
+print(r2test)
