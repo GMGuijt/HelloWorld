@@ -8,5 +8,10 @@ print(list)
 import numpy as np
 
 test = np.array([ [200, 150], [100, 50]])
-plt.imshow(test)
+#plt.imshow(test)
+#plt.show()
+
+plt.scatter(list, list(test[0])
+plt.xlabel('list')
+plt.ylabel('test')
 plt.show()
